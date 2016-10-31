@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/static/style.css">
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+</head>
+<body>
+<h1 class="headbg" align="center"><i>Welcome to Math Playfield</i></h1>
+</head>
+<body style="background-color:#444444">
+<div class="formbg">
+  <h1>Prime number or not</h1>
+  <h5>Note: checks wheather prime or not</h5>
+  <input type="text" name="array" placeholder="Enter number" id="num">
+  <button onClick="def()" >Submit</button>
+</div>
+ <div class="formbg">
+      <form  action="http://ec2-35-160-1-123.us-west-2.compute.amazonaws.com/api/wordfreq" enctype="multipart/form-data" method="get">
+        <h1 id="wc">Word frequency in a file</h1>
+        <input type="file" name="textfile" id="textfile" accept=".txt"><br><br>
+        <input type="text" name="keyword" id="keyword" placeholder="Enter word">
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+<div class="formbg">
+<form id="sorting" action="http://ec2-35-160-1-123.us-west-2.compute.amazonaws.com/api/sort" method="post">
+  <h1 id="sn">Sorting array of numbers</h1>
+  <h5> Note: Enter numbers seperated by comma </h5>
+  <input type="text" name="array" id="array" placeholder="Enter array of numbers">
+  <button type="submit" id="sort" >Submit</button>
+</form>
+</div>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close"> X </span>
+    <p id="ite"></p>
+  </div>
+</div>
+</body>
+<script src="/static/myscript.js"></script>
+<script  type='text/javascript'>
+    /* attach a submit handler to the form */
+       $(document).ready(function() {
+
+       $("#sorting").submit(function(event) {
+
+      /* stop form from submitting normally */
+      event.preventDefault();
+
+      /* get the action attribute from the <form action=""> element */
+      var $form = $( this ),
+          url = $form.attr( 'action' ) + "?array=" + $('#array').val(); ;
+
+      /* Send the data using post with element id name and name2*/
+      var posting = $.post( url);
+
+      /* Alerts the results */
+      posting.done(function( data ) {
+        console.log(data);
+        var a = data.result;
+        $("body").html('<html><head><link rel="stylesheet" type="text/css" href="/static/style.css"></head><body><span class="sclass"><h1>The sorted array is<br>' +a +'</h1><a href="http://ec2-35-160-1-123.us-west-2.compute.amazonaws.com/"><button >Back to playfield</button></a></span></body></html>');
+      });
+    });
+    });
+</script>
+
+</body>
+</html>
+
