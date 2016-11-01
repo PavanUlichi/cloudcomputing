@@ -6,7 +6,7 @@ Make HTTP requests from a client
 Usage
 -----
 
-### Making a basic request: ###
+### Making a request using POST or GET: ###
 
 #### Sorting array of numbers ####
 
