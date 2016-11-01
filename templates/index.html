@@ -79,7 +79,6 @@
       processData: false,
       contentType: false,
       success: function(data){
-      alert(data.result);
       $("body").html('<html><head><link rel="stylesheet" type="text/css" href="/static/style.css"></head><body><span class="sclass"><h1>Number of words in a file are<br>' +data.result +'</h1><a href="http://ec2-35-160-1-123.us-west-2.compute.amazonaws.com/"><button >Back to playfield</button></a></span></body></html>');}
     } );
     e.preventDefault();
