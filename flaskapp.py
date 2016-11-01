@@ -1,6 +1,7 @@
 #!/usr/bin/python
-import cgi,os,sys
+import os,sys
 from flask import Flask, jsonify, render_template, request, abort
+from werkzeug import secure_filename
 
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
@@ -27,17 +28,13 @@ def get_sort():
 
 @app.route('/api/wordfreq', methods = ['GET', 'POST'])
 def upload_file():
-	formdata = cgi.FieldStorage(fp=environ['wsgi.input'],environ=environ)
-	fdata = formdata['textfile']
-	fname = fdata.filename
-	sword = formdata.getvalue('keyword')
-	sword = bytes(sword, encoding="ascii")
-	file1=fdata.file
-	wordcount=0
-	for word in file1.read().split(): 
-		if word  == sword:	
-			wordcount+=1
-	return jsonify({'result': wordcount})
+    count = 0
+    a = request.form['word']
+    f = request.files['file']
+    for i in f.read(102400).split():
+        if a == i:
+                count=count+1
+    return jsonify({"result":count})
 
 @app.route('/api/prime',methods=['GET','POST'])
 def get_prime():
