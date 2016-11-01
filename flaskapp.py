@@ -1,7 +1,6 @@
 #!/usr/bin/python
 import os,sys
 from flask import Flask, jsonify, render_template, request, abort
-from werkzeug import secure_filename
 
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False

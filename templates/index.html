@@ -17,10 +17,10 @@
   </form>
 </div>
  <div class="formbg">
-      <form  action="http://ec2-35-160-1-123.us-west-2.compute.amazonaws.com/api/wordfreq" enctype="multipart/form-data" method="post">
+      <form id="wordcount"  action="http://ec2-35-160-1-123.us-west-2.compute.amazonaws.com/api/wordfreq" enctype="multipart/form-data" method="post">
         <h1 id="wc">Word frequency in a file</h1>
-        <input type="file" name="file" id="textfile" accept=".txt"><br><br>
-        <input type="text" name="word" id="keyword" placeholder="Enter word">
+        <input type="file" name="file" id="file" accept=".txt"><br><br>
+        <input type="text" name="word" id="word" placeholder="Enter word">
         <button type="submit">Submit</button>
       </form>
     </div>
@@ -67,6 +67,26 @@
     });
     });
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script  type='text/javascript'>
+
+       $(document).ready(function() {
+       $( '#wordcount' ) .submit( function( e ) {
+       $.ajax( {
+      url: 'http://ec2-35-160-1-123.us-west-2.compute.amazonaws.com/api/wordfreq',
+      type: 'POST',
+      data: new FormData( this ),
+      processData: false,
+      contentType: false,
+      success: function(data){
+      alert(data.result);
+      $("body").html('<html><head><link rel="stylesheet" type="text/css" href="/static/style.css"></head><body><span class="sclass"><h1>Number of words in a file are<br>' +data.result +'</h1><a href="http://ec2-35-160-1-123.us-west-2.compute.amazonaws.com/"><button >Back to playfield</button></a></span></body></html>');}
+    } );
+    e.preventDefault();
+    });
+});
+ </script>
+
 <script  type='text/javascript'>
     /* attach a submit handler to the form */
        $(document).ready(function() {
