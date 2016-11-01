@@ -8,6 +8,8 @@ Usage
 
 ### Making a basic request: ###
 
+#### Sorting array of numbers ####
+
 ```API
 http://ec2-35-160-1-123.us-west-2.compute.amazonaws.com/api/sort?array=34,7,8,9,1
 ```
@@ -22,6 +24,7 @@ Content-Type: application/json
 {"result":[1,7,8,9,34]}
 
 ```
+#### Prime number or not ####
 ```API
 http://ec2-35-160-1-123.us-west-2.compute.amazonaws.com/api/prime?number=17
 ```
@@ -33,4 +36,17 @@ Content-Length: 26
 Content-Type: application/json
 
 {"result":"Prime Number"}
+```
+#### Word frequency in a file ####
+```API
+curl -i -X POST  -F "file=@sample" -F "word=are" http://ec2-35-160-1-123.us-west-2.compute.amazonaws.com/api/wordfreq
+```
+```Result
+HTTP/1.1 200 OK
+Date: Tue, 01 Nov 2016 16:13:20 GMT
+Server: Apache/2.4.18 (Ubuntu)
+Content-Length: 13
+Content-Type: application/json
+
+{"result":8}
 ```
